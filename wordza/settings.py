@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Wordza Apps
+    'accounts.apps.AccountsConfig',
     'dashboard.apps.DashboardConfig',
     'vocabularies.apps.VocabulariesConfig',
     'cards.apps.CardsConfig',
