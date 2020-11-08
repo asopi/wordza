@@ -2,14 +2,5 @@
 
 {% block content %}
 <h2>Dashboard</h2>  
-
-{% if latest_vocable_list %}
-<ul>
-    {% for vocable in latest_vocable_list %}
-        <li><a href="{% url 'dashboard:detail' vocable.id %}">{{ vocable.value }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No vocables are available.</p>
-{% endif %}
+<!-- TODO: implement dashboard template -->
 {% endblock %}
