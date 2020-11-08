@@ -43,6 +43,5 @@ def loginView(request):
 
 
 def logoutUser(request):
-    print("123")
     logout(request)
     return redirect('login')
