@@ -9,6 +9,6 @@ def vocabulary_view(http_request, *args, **kwargs):
     # }
     return render(http_request, "vocabularies/vocabulary_view.html")
 
+
 def create_view(http_request, *args, **kwargs):
     return render(http_request, "vocabularies/create_view.html")
-
