@@ -2,37 +2,32 @@
 
 {% block content %}
     <h2>Vocabularies</h2>
-<!--    <form action="." method="POST">-->
-<!--        {% csrf_token %}-->
-<!--        {{form.as_p}}-->
-<!--        <input type="submit" name="Save">-->
-<!--    </form>-->
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Language 1</th>
-      <th scope="col">Language 2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<form method="POST" action=""> {% csrf_token %}
+    {{form.as_p}}
+    <input class="form-control" type="text" name="title" placeholder="Title">
+    <input class="form-control" type="text" name="description" placeholder="Description">
+   <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select language
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">German</a>
+    <a class="dropdown-item" href="#">English</a>
+    <a class="dropdown-item" href="#">Spanish</a>
+  </div>
+</div>
+     <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select target language
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">German</a>
+    <a class="dropdown-item" href="#">English</a>
+    <a class="dropdown-item" href="#">Spanish</a>
+  </div>
+</div>
+    <input class="btn btn-primary" type="submit" name="submit" value="Save">
+</form>
 
 {% endblock %}
