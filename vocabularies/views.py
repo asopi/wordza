@@ -4,17 +4,14 @@ from django.contrib.auth.decorators import login_required
 from .models import Vocabulary
 
 @login_required
-def vocabulary_view(httprequest, *args, **kwargs):
-    voc_form = VocabulariesForm(httprequest.POST or None)
+def vocabulary_view(request, *args, **kwargs):
 
-    if voc_form.is_valid():
-        voc_form.save()
-        voc_form = VocabulariesForm()
+
 
     context = {
-        "form": voc_form
     }
-    return render(httprequest, "vocabularies/vocabulary_view.html", context)
+
+    return render(request, "vocabularies/vocabulary_view.html", context)
 
 # def vocabulary_view(httprequest, *args, **kwargs):
 #         my_form = VocabulariesForm(httprequest.POST or None)
@@ -44,4 +41,21 @@ def vocabulary_view(httprequest, *args, **kwargs):
 
 @login_required
 def create_view(request, *args, **kwargs):
-    return render(request, "vocabularies/create_view.html")
+    if request.method == 'POST':
+        voc_form = VocabulariesForm(request.POST or None)
+
+        if voc_form.is_valid():
+            voc_form.save()
+
+        context = {
+            "form": voc_form,
+            "message": "successfully",
+        }
+        return render(request, "vocabularies/create_view.html", context)
+    else:
+        voc_form = VocabulariesForm()
+        context = {
+            "form": voc_form
+        }
+        return render(request, "vocabularies/create_view.html", context)
+
