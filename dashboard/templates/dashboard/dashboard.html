@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<!-- TODO: implement dashboard template -->
+
+{% for learn_set in learn_sets %}
+    <div>
+        {{ learn_set.name }}
+        {{ learn_set.description }}
+    </div>
+{% endfor %}
+
+
+{% endblock %}
