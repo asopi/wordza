@@ -3,5 +3,22 @@
 {% block content %}
     <h2>Vocabularies</h2>
 
+    {% for vocabulary in vocabularies %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ vocabulary.title }}</h5>
+            <p class="card-text">{{ vocabulary.description }}</p>
+            <a href="#" class="btn btn-primary">Add vocables</a>
+          </div>
+        </div>
 
+    {% endfor %}
+<input type="button" class="btn btn-info" value="Input Button" onclick=" relocate_home()">
+
+<script>
+function relocate_home()
+{
+     location.href = "/vocabularies/create";
+}
+</script>
 {% endblock %}
