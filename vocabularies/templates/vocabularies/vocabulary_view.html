@@ -8,17 +8,13 @@
           <div class="card-body">
             <h5 class="card-title">{{ vocabulary.title }}</h5>
             <p class="card-text">{{ vocabulary.description }}</p>
-            <a href="#" class="btn btn-primary">Add vocables</a>
+            <a href="{% url 'vocabularies:edit_view' vocabulary.id %}" class="btn btn-primary">Edit</a>
           </div>
         </div>
 
     {% endfor %}
-<input type="button" class="btn btn-info" value="Input Button" onclick=" relocate_home()">
 
-<script>
-function relocate_home()
-{
-     location.href = "/vocabularies/create";
-}
-</script>
+<a href="{% url 'vocabularies:create_view' %}">+</a>
+
+
 {% endblock %}

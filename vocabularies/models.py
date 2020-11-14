@@ -19,6 +19,7 @@ class Vocabulary(models.Model):
 
 
 class Vocable(models.Model):
+    vocabulary_id = models.ForeignKey(Vocabulary, on_delete=models.CASCADE)
     value = models.CharField(max_length=200)
     translated_value = models.CharField(max_length=200)
     language = models.CharField(max_length=2)
