@@ -3,13 +3,29 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <!-- TODO: implement dashboard template -->
-
-{% for learn_set in learn_sets %}
-    <div>
-        {{ learn_set.name }}
-        {{ learn_set.description }}
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Learn Sets
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for learn_set in learn_sets %}
+                    <li class="list-group-item">{{ learn_set.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                     aria-valuemax="100">25%
+                </div>
+            </div>
+        </div>
     </div>
-{% endfor %}
+</div>
 
 
 {% endblock %}
