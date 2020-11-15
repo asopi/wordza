@@ -32,6 +32,11 @@
                                     <input class="btn btn-primary" type="submit" name="submit" value="Login">
                                 </div>
                                 <br/>
+                                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{message}}
+                    </div>
+                    {% endfor %}
                                 <div>Don't have an account?<br/> <a href="{% url 'register' %}">Register now</a></div>
                                 <br/>
                                 <div id="register-link" class="text-right"></div>
