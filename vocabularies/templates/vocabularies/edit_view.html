@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit View</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{vocabulary_form.as_p}}
+
+    <input class="btn btn-primary" type="submit" name="submit" value="Save">
+
+  {% if message %}
+    {{ message }}
+  {% endif %}
+</form>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{vocable_form.as_p}}
+
+    <input class="btn btn-primary" type="submit" name="submit" value="Add vocable">
+
+</form>
+
+   {% for vocable in vocables %}
+        <div>{{ vocable.value }}</div>
+        <div>{{ vocable.translated_value }}</div>
+
+    {% endfor %}
+
+{% endblock %}
