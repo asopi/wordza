@@ -2,37 +2,19 @@
 
 {% block content %}
     <h2>Vocabularies</h2>
-<!--    <form action="." method="POST">-->
-<!--        {% csrf_token %}-->
-<!--        {{form.as_p}}-->
-<!--        <input type="submit" name="Save">-->
-<!--    </form>-->
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Language 1</th>
-      <th scope="col">Language 2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+    {% for vocabulary in vocabularies %}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ vocabulary.title }}</h5>
+            <p class="card-text">{{ vocabulary.description }}</p>
+            <a href="{% url 'vocabularies:edit_view' vocabulary.id %}" class="btn btn-primary">Edit</a>
+          </div>
+        </div>
+
+    {% endfor %}
+
+<a href="{% url 'vocabularies:create_view' %}">+</a>
+
 
 {% endblock %}

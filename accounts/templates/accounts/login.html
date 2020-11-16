@@ -3,39 +3,49 @@
 {% block content %}
 {% load static %}
 <div align="center">
-    <img src="{% static '/images/wordza_logo.png'%}" style="width:22%" align="center">
-    <br>
-    <br>
-    <div id="login-row" class="row justify-content-center align-items-center">
-        <div id="login-column" class="col-md-6">
-            <div id="login-box" class="col-md-12">
-                <form id="login-form" class="form" action="" method="post">
-                    {% csrf_token %}
-                    <h3 class="text-center text-info">Please Login</h3>
-                    <br/>
-                    <div class="form-group" align="center">
-                        <label for="username" class="text-info">Username:</label> <br/>
-                        <input class="form-control" id="username" type="text" name="username">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <br>
+                <img src="{% static '/images/wordza_logo.png'%}" style="width:100%">
+                <br>
+            </div>
+            <div class="col-sm">
+                <br> <br><br><br>
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                            <form id="login-form" class="form" action="" method="post">
+                                {% csrf_token %}
+                                <h3 class="text-center text-info">Please Login</h3>
+                                <br/>
+                                <div class="form-group" align="center">
+                                    <label for="username" class="text-info">Username:</label> <br/>
+                                    <input class="form-control" id="username" type="text" name="username">
+                                </div>
+                                <div class="form-group" align="center">
+                                    <label for="password" class="text-info">Password:</label><br>
+                                    <input class="form-control" id="password" type="password" name="password">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" name="submit" value="Login">
+                                </div>
+                                <br/>
+                                {% for message in messages %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{message}}
+                                </div>
+                                {% endfor %}
+                                <div>Don't have an account?<br/> <a href="{% url 'register' %}">Register now</a></div>
+                                <br/>
+                                <div id="register-link" class="text-right"></div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group" align="center">
-                        <label for="password" class="text-info">Password:</label><br>
-                        <input class="form-control" id="password" type="password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" name="submit" value="Login">
-                    </div>
-                    <br/>
-                    {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
-                        {{message}}
-                    </div>
-                    {% endfor %}
-                    <div>Don't have an account?<br/> <a href="{% url 'register' %}">Register now</a></div>
-                    <br/>
-                    <div id="register-link" class="text-right"></div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+    {% endblock %}
 </div>
-{% endblock %}
