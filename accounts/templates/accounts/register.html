@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 {% load static %}
 <div align="center">
@@ -12,7 +11,7 @@
             </div>
             <div class="col-sm">
                 <br>
-                <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="register-row" class="row justify-content-center align-items-center">
                     <div id="register-column" class="col-md-6">
                         <div id="register-box" class="col-md-12">
                             {% csrf_token %}
@@ -21,25 +20,23 @@
                                 <br/>
                                 <div class="form-group" align="center">
                                     <label for="username" class="text-info">Create Username:</label> <br/>
-                                    <input class="form-control" id="username" type="text" name="username">
+                                    <input type="text" name="username" class="form-control" id="username" >
                                 </div>
                                 <div class="form-group" align="center">
-                                    <label for="Email address" class="text-info">Email address:</label> <br/>
-                                    <input class="form-control" id="Email address" type="text" name="Email address">
+                                    <label for="email" class="text-info">Email address:</label> <br/>
+                                    <input class="form-control" id="email" type="email" name="email">
                                 </div>
                                 <div class="form-group" align="center">
-                                    <label for="password" class="text-info">Create Password:</label><br>
-                                    <input class="form-control" id="password" type="password" name="password">
+                                    <label for="password1" class="text-info">Create Password:</label><br>
+                                    <input class="form-control" id="password1" type="password" name="password1" autocomplete="new-password">
                                 </div>
                                 <div class="form-group" align="center">
-                                    <label for="password" class="text-info">Password confirmation:</label><br>
-                                    <input class="form-control" id="password confirmation" type="password"
-                                           name="password">
+                                    <label for="password2" class="text-info">Password confirmation:</label><br>
+                                    <input class="form-control" id="password2" type="password" name="password2" autocomplete="new-password">
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" name="Create User"
-                                           value="Create Account">
+                                    <input class="btn btn-primary" type="submit" name="Create User" value="Create Account">
                                 </div>
                                 <br/>
                                 {% csrf_token %}
