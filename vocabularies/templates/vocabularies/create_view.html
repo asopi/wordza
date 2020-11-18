@@ -6,28 +6,6 @@
 <form method="POST" action="">
     {% csrf_token %}
     {{form.as_p}}
-<!--    <input class="form-control" type="text" name="title" placeholder="Title">-->
-<!--    <input class="form-control" type="text" name="description" placeholder="Description">-->
-<!--   <div class="dropdown">-->
-<!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--    Select language-->
-<!--  </button>-->
-<!--  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--    <a class="dropdown-item" href="#">German</a>-->
-<!--    <a class="dropdown-item" href="#">English</a>-->
-<!--    <a class="dropdown-item" href="#">Spanish</a>-->
-<!--  </div>-->
-<!--</div>-->
-<!--     <div class="dropdown">-->
-<!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--    Select target language-->
-<!--  </button>-->
-<!--  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--    <a class="dropdown-item" href="#">German</a>-->
-<!--    <a class="dropdown-item" href="#">English</a>-->
-<!--    <a class="dropdown-item" href="#">Spanish</a>-->
-<!--  </div>-->
-<!--</div>-->
     <input class="btn btn-primary" type="submit" name="submit" value="Save">
 
   {% if message %}
