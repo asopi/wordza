@@ -11,6 +11,7 @@ body {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   background-color: #b3e5fc;
+  margin: 0px auto;
 }
 
 .card {
@@ -23,7 +24,7 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 12px 20px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 17px 25px 0 rgba(0,0,0,0.2);
 }
 
 .container {
@@ -33,13 +34,13 @@ body {
 
 </style>
 
-<div class="page-header">
-<h2>Vocabularies</h2>
+<div>
+<h1 class="text-start text-info">Vocabularies</h1>
 <br>
 <br>
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
         {% for vocabulary in vocabularies %}
