@@ -1,16 +1,64 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Create View</h1>
+<style>
+body {
+  height: 100%;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  background-color: #b3e5fc;
+}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input class="btn btn-primary" type="submit" name="submit" value="Save">
+</style>
 
-  {% if message %}
-    {{ message }}
-  {% endif %}
-</form>
+<!--<form method="POST" action="">-->
+<!--    {{form.as_p}} -->
+<div id="create-row" class="row justify-content-center align-items-center">
+    <div id="create-column" class="col-md-6">
+        <div id="create-box" class="col-md-12">
+            <form id="create-form" class="form" action="" method="post">
+                {% csrf_token %}
+                <h1 class="text-center text-info">Create new vocabularies</h1>
+                <br/>
+                <div class="form-group" align="center">
+                    <label class="text-info">Title</label> <br/>
+                    <input class="form-control" id="title" type="text" name="Title">
+                </div>
+                <div class="form-group" align="center">
+                    <label for="description" class="text-info">Description</label>
+                    <textarea class="form-control" id="description"></textarea>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="language">Language</label>
+                    <select multiple class="form-control" id="language">
+                        <option>German</option>
+                        <option>English</option>
+                        <option>Spanish</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="target_language">Target language</label>
+                    <select multiple class="form-control" id="target_language">
+                        <option>German</option>
+                        <option>English</option>
+                        <option>Spanish</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" name="submit" value="Add vocabulary">
+                </div>
+                <br/>
+            </form>
+        </div>
+    </div>
+</div>
 
-{% endblock %}
+                <!--  {% if message %}-->
+                <!--    {{ message }}-->
+                <!--  {% endif %}-->
+                <!--</form>-->
+
+                {% endblock %}
