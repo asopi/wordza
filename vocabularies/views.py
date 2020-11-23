@@ -21,17 +21,15 @@ def vocabulary_view(request, *args, **kwargs):
 
 @login_required
 def create_view(request, *args, **kwargs):
+    print('test')
+    print(request)
     if request.method == 'POST':
         voc_form = VocabulariesForm(request.POST or None)
 
         if voc_form.is_valid():
             voc_form.save()
 
-        context = {
-            "form": voc_form,
-            "message": "Successful!",
-        }
-        return render(request, "vocabularies/create_view.html", context)
+        return vocabulary_view(request)
     else:
         voc_form = VocabulariesForm()
         context = {

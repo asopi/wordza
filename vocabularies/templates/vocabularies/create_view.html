@@ -1,49 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-body {
-  height: 100%;
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  background-color: #b3e5fc;
-}
-
-</style>
-
+ {% load static %}
 <!--<form method="POST" action="">-->
 <!--    {{form.as_p}} -->
-<div id="create-row" class="row justify-content-center align-items-center">
+<div class="row justify-content-center align-items-center">
     <div id="create-column" class="col-md-6">
         <div id="create-box" class="col-md-12">
-            <form id="create-form" class="form" action="" method="post">
+            <form id="create-form" class="form" action="" method="POST">
                 {% csrf_token %}
                 <h1 class="text-center text-info">Create new vocabularies</h1>
                 <br/>
                 <div class="form-group" align="center">
                     <label class="text-info">Title</label> <br/>
-                    <input class="form-control" id="title" type="text" name="Title">
+                    <input class="form-control" id="title" type="text" name="title">
                 </div>
                 <div class="form-group" align="center">
                     <label for="description" class="text-info">Description</label>
-                    <textarea class="form-control" id="description"></textarea>
+                    <textarea class="form-control" id="description" name="description"></textarea>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="language">Language</label>
-                    <select multiple class="form-control" id="language">
-                        <option>German</option>
-                        <option>English</option>
-                        <option>Spanish</option>
+                    <select multiple class="form-control" id="language" name="language">
+                        <option value="DE">German</option>
+                        <option value="EN">English</option>
+                        <option value="ES">Spanish</option>
                     </select>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="target_language">Target language</label>
-                    <select multiple class="form-control" id="target_language">
-                        <option>German</option>
-                        <option>English</option>
-                        <option>Spanish</option>
+                    <select multiple class="form-control" id="target_language" name="target_language">
+                        <option value="DE">German</option>
+                        <option value="EN">English</option>
+                        <option value="ES">Spanish</option>
                     </select>
                 </div>
                 <br>
@@ -56,9 +47,9 @@ body {
     </div>
 </div>
 
-                <!--  {% if message %}-->
-                <!--    {{ message }}-->
-                <!--  {% endif %}-->
-                <!--</form>-->
+    {% if message %}
+        {{ message }}
+    {% endif %}
 
-                {% endblock %}
+
+{% endblock %}
