@@ -78,7 +78,7 @@ def edit_view(request, vocabulary_id):
                 Vocabulary, Vocable, fields=('value', 'translated_value'), extra=1)
             form_set = VocabularyFormSet(
                 queryset=Vocable.objects.none(), instance=vocabulary)
-            vocables = Vocable.objects.filter(vocabulary_id=vocabulary_id)
+            vocables = Vocable.objects.filter(vocabulary_id=vocabulary_id).order_by('-creation_date')
             context = {
                 "form": form,
                 "form_set": form_set,

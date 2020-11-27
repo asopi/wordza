@@ -4,42 +4,50 @@
 
 <form method="POST" action="" id="vocabulary_form">
   {% csrf_token %}
-  {{ form.as_p }}
+    <h2>{{ form.title }}</h2>
+    <div>{{ form.description }}</div>
+
   {{ form_set.management_form }}
-  {% for form in form_set %}
-    <table>
+
+    <table class="table table-striped table-dark mt-5">
       <thead>
         <tr>
           <th>
-            {{ form.value.label }}
+            {{ vocabulary.language }}
           </th>
           <th>
-            {{ form.translated_value.label }}
+            {{ vocabulary.target_language }}
           </th>
         </tr>
-    
+
       </thead>
       <tbody>
+        {% for vocable_form in form_set %}
+        <tr>
+          <td>
+            {{ vocable_form.value }}
+          </td>
+          <td>
+            {{ vocable_form.translated_value }}
+             <input class="btn btn-primary" type="submit" name="submit" value="Save" />
+              <button type="submit" form="vocabulary_form" value="Submit">{% include 'plus_icon_empty.html' %}</button>
+          </td>
+        </tr>
+        {% endfor %}
+
         {% for vocable in vocables %}
         <tr>
           <td>{{ vocable.value }}</td>
           <td>{{ vocable.translated_value }}</td>
         </tr>
         {% endfor %}
-        <tr>
-          <td>
-           {{ form.value }}
-          </td>
-          <td>
-           {{ form.translated_value }}
-          </td>
-        </tr>
+
       </tbody>
     </table>
     <br />
-  {% endfor %}
- 
-  <input class="btn btn-primary" type="submit" name="submit" value="Save" />
+
+
+
 
   {% if message %}
   {{ message }}
@@ -65,7 +73,6 @@
           $('#id_vocable_set-0-translated_value').val(e);        
         },
       });
-
     }); 
   });
 </script>
