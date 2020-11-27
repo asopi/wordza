@@ -128,5 +128,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    'vat/www/static'
+    'vat/www/static',
 ]
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"google-credentials.json"

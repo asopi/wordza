@@ -2,17 +2,40 @@
 {% block content %}
 <h1>Edit View</h1>
 
-<form method="POST" action="">
+<form method="POST" action="" id="vocabulary_form">
   {% csrf_token %}
   {{ form.as_p }}
   {{ form_set.management_form }}
-  {% for vocable in vocables %}
-  <div>{{ vocable.value }}</div>
-  <div>{{ vocable.translated_value }}</div>
-
-  {% endfor %}
   {% for form in form_set %}
-  {{ form }}
+    <table>
+      <thead>
+        <tr>
+          <th>
+            {{ form.value.label }}
+          </th>
+          <th>
+            {{ form.translated_value.label }}
+          </th>
+        </tr>
+    
+      </thead>
+      <tbody>
+        {% for vocable in vocables %}
+        <tr>
+          <td>{{ vocable.value }}</td>
+          <td>{{ vocable.translated_value }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td>
+           {{ form.value }}
+          </td>
+          <td>
+           {{ form.translated_value }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <br />
   {% endfor %}
  
@@ -22,5 +45,28 @@
   {{ message }}
   {% endif %}
 </form>
+{% endblock %}
 
+
+{% block custome_script %}
+<script>
+  $(document).ready(function(){
+  $('#id_vocable_set-0-value').blur(function(e){
+      $.ajax({
+          method:'POST',
+          url: '{% url 'vocabularies:translate_vocable' %}',
+          data:{
+          value:$('#id_vocable_set-0-value').val(),
+          language: '{{ vocabulary.language }}',
+          target_language: '{{ vocabulary.target_language }}',
+          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        }, 
+        success: function(e) {
+          $('#id_vocable_set-0-translated_value').val(e);        
+        },
+      });
+
+    }); 
+  });
+</script>
 {% endblock %}
