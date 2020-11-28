@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import LearnSet
+from .models import Vocabulary
+from .forms import LanguageForm
 
 
 @login_required
@@ -14,7 +16,11 @@ def learn_set_view(request):
 
 @login_required
 def create_view(request):
-    return render(request, 'cards/create_view.html')
+    language_form = LanguageForm()
+    context = {
+        "language_form": language_form
+    }
+    return render(request, 'cards/create_view.html', context)
 
 
 @login_required
