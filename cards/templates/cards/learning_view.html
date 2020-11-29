@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <h2>Learning view for {{ learn_set.name }}</h2>
 
-<h2>Cards</h2>
-<div class="card transition">
-  <h2 class="transition">#here is the vocable</h2>
-  <p>#Here is the translation value of the card</p>
-  <div class="cta-container transition"><a href="#" class="cta">Call to action</a></div>
-  <div class="card_circle transition"></div>
+<form>
+
+</form>
+
+{% for vocable in vocables %}
+<div class="flip-card" id="flip-card-{{vocable.id}}" onclick="flip('{{vocable.id}}')">
+    <div class="flip-card-inner">
+        <div class="flip-card-front card-body">
+            <h1>{{ vocable.value }}</h1>
+        </div>
+        <div class="flip-card-back card-body">
+            <h1>{{ vocable.translated_value }}</h1>
+        </div>
+    </div>
 </div>
+<div>
+</div>
+{% endfor %}
+
+
+<script>
+  flip = (id) => document.querySelector("#flip-card-" + id).classList.toggle("flip-card-flipped")
+</script>
+
 {% endblock %}
