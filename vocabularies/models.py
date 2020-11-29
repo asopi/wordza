@@ -19,17 +19,15 @@ class Vocabulary(models.Model):
 
 
 class Vocable(models.Model):
-    vocabulary_id = models.ForeignKey(Vocabulary, on_delete=models.CASCADE)
+    vocabulary = models.ForeignKey(Vocabulary, on_delete=models.CASCADE)
     value = models.CharField(max_length=200)
     translated_value = models.CharField(max_length=200)
     language = models.CharField(max_length=2)
     target_language = models.CharField(max_length=2)
+    success_counter = models.IntegerField(default=0)
+    failed_counter = models.IntegerField(default=0)
     creation_date = models.DateTimeField(auto_now_add=True)
+    modification_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.value
-
-
-
-
-

@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Learn Set View</h2>
-
+{% load static %}
 {% for learn_set in learn_sets %}
 <div class="card" style="width: 18rem;">
     <div class="card-body">
@@ -16,7 +16,7 @@
 {% endfor %}
 
 <div class="form-group" align="center">
-    <input class="btn btn-primary" type="submit" name="submit" value="Create new Learn Set">
+    <a class="btn btn-primary" href="{% url 'cards:language_view' %}">Create new Learn Set</a>
 </div>
 
 

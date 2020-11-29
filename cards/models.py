@@ -13,17 +13,3 @@ class LearnSet(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Cards(models.Model):
-    learn_set = models.ForeignKey(LearnSet, on_delete=models.CASCADE)
-    front_side = models.CharField(max_length=200)
-    back_side = models.CharField(max_length=200)
-    success_counter = models.IntegerField()
-    failed_counter = models.IntegerField()
-    creation_date = models.DateTimeField(auto_now_add=True)
-    modification_date = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.front_side
-
