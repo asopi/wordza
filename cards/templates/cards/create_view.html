@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create Learn Set</h2>
+
+{% if language_form %}
+<div>Please select your Language Pair for this Learn Set</div>
+<form method="POST" action="{% url 'cards:language_view' %}">
+    {% csrf_token %}
+    {{ language_form.as_p }}
+    <input class="btn btn-primary" type="submit" value="Next">
+</form>
+{% endif %}
+
+{% if learn_set_form %}
+<form method="POST" action="{% url 'cards:create_view' %}">
+    {% csrf_token %}
+    {{ learn_set_form.as_p }}
+    <input class="btn btn-primary" type="submit" value="Next">
+</form>
+{% endif %}
+
+
+<!--Form wo wir die Vocabularies auswählen -->
+{% endblock %}

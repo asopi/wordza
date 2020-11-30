@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Learn Set View</h2>
+{% load static %}
+{% for learn_set in learn_sets %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ learn_set.name }}</h5>
+        <p class="card-text">{{ learn_set.description }}</p>
+        <a class="btn btn-primary" href="{% url 'cards:progress_view' learn_set.id %}">Progress</a>
+        <a class="btn btn-primary" href="{% url 'cards:learning_view' learn_set.id %}">Learn</a>
+    </div>
+</div>
+
+{% endfor %}
+
+<div class="form-group" align="center">
+    <a class="btn btn-primary" href="{% url 'cards:language_view' %}">Create new Learn Set</a>
+</div>
+
+
+{% endblock %}
