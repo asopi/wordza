@@ -1,31 +1,79 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    <h1>Edit View</h1>
+<h1>Edit View</h1>
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{vocabulary_form.as_p}}
+<form method="POST" action="" id="vocabulary_form">
+  {% csrf_token %}
+    <h2>{{ form.title }}</h2>
+    <div>{{ form.description }}</div>
 
-    <input class="btn btn-primary" type="submit" name="submit" value="Save">
+  {{ form_set.management_form }}
+
+    <table class="table table-striped table-dark mt-5">
+      <thead>
+        <tr>
+          <th>
+            {{ vocabulary.language }}
+          </th>
+          <th>
+            {{ vocabulary.target_language }}
+          </th>
+        </tr>
+
+      </thead>
+      <tbody>
+        {% for vocable_form in form_set %}
+        <tr>
+          <td>
+            {{ vocable_form.value }}
+          </td>
+          <td>
+            {{ vocable_form.translated_value }}
+             <input class="btn btn-primary" type="submit" name="submit" value="Save" />
+              <button type="submit" form="vocabulary_form" value="Submit">{% include 'plus_icon_empty.html' %}</button>
+          </td>
+        </tr>
+        {% endfor %}
+
+        {% for vocable in vocables %}
+        <tr>
+          <td>{{ vocable.value }}</td>
+          <td>{{ vocable.translated_value }}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+    <br />
+
+
+
 
   {% if message %}
-    {{ message }}
+  {{ message }}
   {% endif %}
 </form>
+{% endblock %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{vocable_form.as_p}}
 
-    <input class="btn btn-primary" type="submit" name="submit" value="Add vocable">
-
-</form>
-
-   {% for vocable in vocables %}
-        <div>{{ vocable.value }}</div>
-        <div>{{ vocable.translated_value }}</div>
-
-    {% endfor %}
-
+{% block custome_script %}
+<script>
+  $(document).ready(function(){
+  $('#id_vocable_set-0-value').blur(function(e){
+      $.ajax({
+          method:'POST',
+          url: '{% url 'vocabularies:translate_vocable' %}',
+          data:{
+          value:$('#id_vocable_set-0-value').val(),
+          language: '{{ vocabulary.language }}',
+          target_language: '{{ vocabulary.target_language }}',
+          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        }, 
+        success: function(e) {
+          $('#id_vocable_set-0-translated_value').val(e);        
+        },
+      });
+    }); 
+  });
+</script>
 {% endblock %}
