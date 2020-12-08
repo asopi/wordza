@@ -46,4 +46,8 @@ body {
   transform: rotateY(180deg);
 }
 
-
+.card-hover:hover {
+  cursor: pointer;
+  background-color: #cce5ff;
+  border-color: #b8daff;
+}
