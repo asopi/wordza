@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div align="center">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <br>
+                <img src="{% static '/images/wordza_logo.png'%}" style="width:100%">
+                <br>
+            </div>
+            <div class="col-sm">
+                <br>
+                <div id="register-row" class="row justify-content-center align-items-center">
+                    <div id="register-column" class="col-md-6">
+                        <div id="register-box" class="col-md-12">
+                            {% csrf_token %}
+                            <form id="register-form" class="form" action="" method="post">
+                                <h3 class="text-center text-info">Please Register</h3>
+                                <br/>
+                                <div class="form-group" align="center">
+                                    <label for="username" class="text-info">Create Username:</label> <br/>
+                                    <input type="text" name="username" class="form-control" id="username">
+                                    {% if form.errors.username %}
+                                    <br>
+                                    {% for error in form.errors.username %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group" align="center">
+                                    <label for="email" class="text-info">Email address:</label> <br/>
+                                    <input class="form-control" id="email" type="email" name="email">
+                                    {% if form.errors.email %}
+                                    <br>
+                                    {% for error in form.errors.email %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group" align="center">
+                                    <label for="password1" class="text-info">Create Password:</label><br>
+                                    <input class="form-control" id="password1" type="password" name="password1"
+                                           autocomplete="new-password">
+                                    {% if form.errors.password1 %}
+                                    <br>
+                                    {% for error in form.errors.password1 %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group" align="center">
+                                    <label for="password2" class="text-info">Password confirmation:</label><br>
+                                    <input class="form-control" id="password2" type="password" name="password2"
+                                           autocomplete="new-password">
+                                    {% if form.errors.password2 %}
+                                    <br>
+                                    {% for error in form.errors.password2 %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" name="Create User"
+                                           value="Create Account">
+                                </div>
+                                <br/>
+                                {% csrf_token %}
+                                <div>Already have an account?<br/> <a href="{% url 'login' %}">Login</a></div>
+                                <br/>
+                                <div id="register-link" class="text-right"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</div>

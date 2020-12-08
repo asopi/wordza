@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Vocabularies</h2>
+
+<div class="row">
+    {% for vocabulary in vocabularies %}
+    <div class="col-md-4 mt-3 mb-3">
+        <a href="{% url 'vocabularies:edit_view' vocabulary.id %}" class="text-decoration-none text-reset">
+            <div class="card card-hover">
+                <div class="card-body">
+                    <h4 class="card-title">{{ vocabulary.title }}</h4>
+                    <p class="card-text">{{ vocabulary.description }}</p>
+
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <div class="col-md-12 mt-3 mb-3">
+        <div class="col alert alert-primary" role="alert">
+            You haven't created any vocabularies yet. Click + to create one.
+        </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-4 mt-3 mb-3">
+        <div class="card card-hover">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <a href="#" data-toggle="modal" data-target="#createVocabularyModal">
+                        {% include 'icons/plus_icon.html' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include './create_view.html' %}
+
+{% endblock %}

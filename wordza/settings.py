@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Wordza Apps
+    'accounts.apps.AccountsConfig',
     'dashboard.apps.DashboardConfig',
     'vocabularies.apps.VocabulariesConfig',
     'cards.apps.CardsConfig',
@@ -124,3 +125,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    'vat/www/static',
+]
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"google-credentials.json"
