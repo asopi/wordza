@@ -1,8 +1,6 @@
 from django.db import models
 from vocabularies.models import Vocabulary
 
-# Create your models here.
-
 
 class LearnSet(models.Model):
     name = models.CharField(max_length=200)
@@ -12,4 +10,4 @@ class LearnSet(models.Model):
     modification_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)

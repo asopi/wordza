@@ -4,10 +4,6 @@
 {% load static %}
 <h2>Learning view for {{ learn_set.name }}</h2>
 
-<form>
-
-</form>
-
 {% for vocable in vocables %}
 <div class="flip-card" id="flip-card-{{vocable.id}}" onclick="flip('{{vocable.id}}')">
     <div class="flip-card-inner">
@@ -19,13 +15,12 @@
         </div>
     </div>
 </div>
-<div>
-</div>
 {% endfor %}
 
 
 <script>
   flip = (id) => document.querySelector("#flip-card-" + id).classList.toggle("flip-card-flipped")
+
 </script>
 
 {% endblock %}

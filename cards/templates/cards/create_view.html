@@ -1,25 +1,50 @@
-{% extends 'base.html' %}
+<div class="modal fade" id="createLearnSetModal" tabindex="-1" aria-labelledby="createLearnSetModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createLearnSetModalLabel">Create a new learn set</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% if language_form %}
+                <form method="POST" action="." id="language_form">
+                    {% csrf_token %}
+                    {{ language_form.as_p }}
+                </form>
+                {% endif %}
 
-{% block content %}
-<h2>Create Learn Set</h2>
-
-{% if language_form %}
-<div>Please select your Language Pair for this Learn Set</div>
-<form method="POST" action="{% url 'cards:language_view' %}">
-    {% csrf_token %}
-    {{ language_form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Next">
-</form>
-{% endif %}
-
-{% if learn_set_form %}
-<form method="POST" action="{% url 'cards:create_view' %}">
-    {% csrf_token %}
-    {{ learn_set_form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Next">
-</form>
-{% endif %}
-
-
-<!--Form wo wir die Vocabularies auswählen -->
-{% endblock %}
+                {% if learn_set_form %}
+                    {% if learn_set_form.vocabularies|length > 0 %}
+                    <form method="POST" action="{% url 'cards:create_view' %}" id="learn_set_form">
+                        {% csrf_token %}
+                        {{ learn_set_form.as_p }}
+                    </form>
+                    {% else %}
+                    <div>No vocabularies for this language pair</div>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                {% if language_form %}
+                <button type="submit" class="btn btn-outline-secondary" form="language_form" id="next-button">
+                    {% include 'icons/arrow_right_icon.html' %}
+                </button>
+                {% endif %}
+                {% if learn_set_form %}
+                    {% if learn_set_form.vocabularies|length == 0 %}
+                    <a class="btn btn-outline-secondary" href="{% url 'cards:learn_set_view' %}?show-modal=true">
+                        {% include 'icons/arrow_left_icon.html' %}
+                    </a>
+                    {% else %}
+                    <button type="submit" class="btn btn-outline-primary" form="learn_set_form" id="create-button">
+                        {% include 'icons/check_icon.html' %}
+                    </button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
