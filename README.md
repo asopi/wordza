@@ -2,6 +2,7 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
+2. [Features](#features)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
 4. [Collaboration](#collaboration)
@@ -11,12 +12,19 @@
 Derived from the initial situation that students in foreign language modules often lack certain vocabulary, wordza will be developed.
 It is a learning application which focuses especially on the translation of individually created vocabulary lists.
 
+## Features
+* Accounts: 
+* Dashboard: 
+* Vocabularies: 
+* Learn sets: 
+
 ## Technologies
 
 A list of technologies used within the project:
-* [Technology name](https://example.com): Version 12.3 
-* [Technology name](https://example.com): Version 2.34
-* [Library name](https://example.com): Version 1234
+* [Django](https://www.djangoproject.com): Version 3.1.2 
+* [Python](https://www.python.org): Version 3.8.5
+* [Bootstrap](https://getbootstrap.com): Version 4.5.3
+* [Google Translate API](https://cloud.google.com/translate/): Version 1234
 
 ## Installation
 
@@ -24,9 +32,9 @@ A little intro about the installation of wordza.
 
 First clone the repository from Github and switch to the new directory:
 
-$ git clone git@github.com/USERNAME/{{ project_name }}.git
+$ git clone https://github.com/asopi/wordza.git
 
-$ cd {{ project_name }}
+$ cd wordza 
 
 Activate the virtualenv for your project.
 
@@ -49,6 +57,5 @@ $ python manage.py runserver
 ## Collaboration
 
 Give instructions on how to collaborate with your project.
-> Maybe you want to write a quote in this part. 
-> It should go over several rows?
-> This is how you do it.
+> Docu: Versionierung
+> Beispiele

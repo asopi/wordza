@@ -2,68 +2,41 @@
 
 {% block content %}
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700');
+<h2>Vocabularies</h2>
 
-
-body {
-  height: 100%;
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  background-color: #b3e5fc;
-  margin: 0px auto;
-}
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  border-radius: 5px;
-  margin-bottom: 50px;
-  width: 80%;
-  background-color: #ffffff;
-}
-
-.card:hover {
-  box-shadow: 0 17px 25px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-  padding: 2px 16px;
-}
-
-
-</style>
-
-<div>
-<h1 class="text-start text-info">Vocabularies</h1>
-<br>
-<br>
-</div>
-
-<div class="container">
-    <div class="row">
-
-        {% for vocabulary in vocabularies %}
-
-        <div class="col-md-4">
-            <div class="card">
+<div class="row">
+    {% for vocabulary in vocabularies %}
+    <div class="col-md-4 mt-3 mb-3">
+        <a href="{% url 'vocabularies:edit_view' vocabulary.id %}" class="text-decoration-none text-reset">
+            <div class="card card-hover">
                 <div class="card-body">
                     <h4 class="card-title">{{ vocabulary.title }}</h4>
                     <p class="card-text">{{ vocabulary.description }}</p>
-                    <div class="row justify-content-center">
-                        <a href="{% url 'vocabularies:edit_view' vocabulary.id %}" class="btn btn-primary">Edit</a>
-                    </div>
+
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+    <div class="col-md-12 mt-3 mb-3">
+        <div class="col alert alert-primary" role="alert">
+            You haven't created any vocabularies yet. Click + to create one.
+        </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-4 mt-3 mb-3">
+        <div class="card card-hover">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <a href="#" data-toggle="modal" data-target="#createVocabularyModal">
+                        {% include 'icons/plus_icon.html' %}
+                    </a>
                 </div>
             </div>
         </div>
-            {% endfor %}
-
-        </div>
-        <div class="row justify-content-center">
-            <a href="{% url 'vocabularies:create_view' %}">
-                {% include 'icons/plus_icon.html' %}
-            </a>
-        </div>
     </div>
+</div>
 
-    {% endblock %}
+{% include './create_view.html' %}
+
+{% endblock %}
