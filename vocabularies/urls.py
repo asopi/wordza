@@ -5,6 +5,5 @@ app_name = 'vocabularies'
 urlpatterns = [
     path('', views.vocabulary_view, name="vocabulary_view"),
     path('vocabulary/<int:vocabulary_id>/', views.edit_view, name='edit_view'),
-    path('create', views.create_view, name='create_view'),
     path('translate/', views.translate_vocable, name='translate_vocable')
 ]

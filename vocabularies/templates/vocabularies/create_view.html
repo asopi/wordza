@@ -1,53 +1,66 @@
-{% extends 'base.html' %}
-
-{% block content %}
- {% load static %}
-<div class="row justify-content-center align-items-center">
-    <div id="create-column" class="col-md-6">
-        <div id="create-box" class="col-md-12">
-            <form id="create-form" class="form" action="" method="POST">
-                {% csrf_token %}
-                <h1 class="text-center text-info">Create new vocabularies</h1>
-                <br/>
-                <div class="form-group" align="center">
-                    <label class="text-info">Title</label> <br/>
-                    <input class="form-control" id="title" type="text" name="title">
-                </div>
-                <div class="form-group" align="center">
-                    <label for="description" class="text-info">Description</label>
-                    <textarea class="form-control" id="description" name="description"></textarea>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="language">Language</label>
-                    <select multiple class="form-control" id="language" name="language">
-                        <option value="DE">German</option>
-                        <option value="EN">English</option>
-                        <option value="ES">Spanish</option>
-                    </select>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="target_language">Target language</label>
-                    <select multiple class="form-control" id="target_language" name="target_language">
-                        <option value="DE">German</option>
-                        <option value="EN">English</option>
-                        <option value="ES">Spanish</option>
-                    </select>
-                </div>
-                <br>
-                <div class="form-group">
-                    <input class="btn btn-primary" type="submit" name="submit" value="Add vocabulary">
-                </div>
-                <br/>
-            </form>
+<div class="modal fade" id="createVocabularyModal" tabindex="-1" aria-labelledby="createVocabularyModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createVocabularyModalLabel">Create a new vocabulary</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" id="create_vocabulary">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Title</label>
+                        <div class="col-md-10">
+                            <input class="form-control" id="title" type="text" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="description">Description</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="language">Language</label>
+                        <div class="col-md-10">
+                            {% for language in languages %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="language" id="language"
+                                       value="{{language.0}}">
+                                <label class="form-check-label" for="{{language.0}}">
+                                    {{language.1}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2" for="target_language">Target language</label>
+                        <div class="col-md-10">
+                            {% for language in languages %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="target_language" id="target_language"
+                                       value="{{language.0}}">
+                                <label class="form-check-label" for="{{language.0}}">
+                                    {{language.1}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+                {% if vocabulary_form.errors %}
+                {{ vocabulary_form.errors }}
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary" type="submit" form="create_vocabulary" value="Submit">{% include
+                    'icons/check_icon.html' %}
+                </button>
+            </div>
         </div>
     </div>
 </div>
-
-    {% if message %}
-        {{ message }}
-    {% endif %}
-
-
-{% endblock %}
