@@ -8,8 +8,8 @@ from .forms import CustomeUserCreationForm
 @unauthenticated_user
 def register_view(request):
     """
-    Takes unauthorized request and returns the rendered view which includes the registration form.
-    If the user is already logged in, he will be redirected to the dashboard.
+    Takes request and returns the rendered view which includes the registration form.
+    In case of POST, a new user will be created and redirected to the login page.
     """
     form = CustomeUserCreationForm()
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def register_view(request):
 @unauthenticated_user
 def login_view(request):
     """
-    Takes the unauthorized request and returns the login form.
+    Takes the request and returns the login form. In case of POST, the user will be logged in.
     """
     if request.method == 'POST':
         username = request.POST['username']
