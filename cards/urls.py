@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.learn_set_view, name='learn_set_view'),
     path('create/', views.create_view, name='create_view'),
     path('learning/<int:learn_set_id>/', views.learning_view, name='learning_view'),
+    path('learning/submit/<int:vocable_id>', views.submit_vocable, name='submit_vocable'),
     path('progress/<int:learn_set_id>/', views.progress_view, name='progress_view'),
 ]
