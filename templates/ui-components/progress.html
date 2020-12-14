@@ -1,0 +1,20 @@
+<div class="progress">
+    <div class="progress-bar 
+    {% if progress <= 25 %}
+        bg-danger
+    {% elif progress > 25 and progress < 75 %}
+        bg-warning
+    {% elif progress >= 75 %}
+        bg-success
+    {% else %}
+        bg-success
+    {% endif %}
+    "
+    role="progressbar"
+    style="width: {{ progress }}%;"
+    aria-valuenow="{{ progress }}"
+    aria-valuemin="0"
+    aria-valuemax="100">
+        {{ progress }}%
+    </div>
+</div>
