@@ -12,6 +12,10 @@ translate_client = translate.Client()
 
 @login_required
 def vocabulary_view(request):
+    """
+    Takes request and returns rendered view for all vocabularies.
+    In case of POST request, a new vocabulary is saved.
+    """
     vocabularies = Vocabulary.objects.filter(user=request.user).order_by('-creation_date')
     vocabulary_form = VocabulariesForm(request.POST or None)
     if request.method == 'POST':
@@ -31,6 +35,9 @@ def vocabulary_view(request):
 
 @login_required
 def edit_view(request, vocabulary_id):
+    """
+    Takes request and returns rendered view for editing the vocabulary and adding new words.
+    """
     vocabulary = get_object_or_404(Vocabulary, pk=vocabulary_id)
     vocables = Vocable.objects.filter(
         user=request.user,
@@ -76,6 +83,11 @@ def edit_view(request, vocabulary_id):
 
 @login_required
 def translate_vocable(request):
+    """
+    Takes the request including source language, target language and the word to be translated
+    and sends it to Google Translate API.
+    The response is the translated word which is returned.
+    """
     if request.method == 'POST':
         value = request.POST["value"]
         source_language = request.POST["source_language"]

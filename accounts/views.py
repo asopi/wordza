@@ -1,22 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import Group
 from .decorators import unauthenticated_user
 from .forms import CustomeUserCreationForm
 
 
 @unauthenticated_user
-def registerView(request):
+def register_view(request):
+    """
+    Takes request and returns the rendered view which includes the registration form.
+    In case of POST, a new user will be created and redirected to the login page.
+    """
     form = CustomeUserCreationForm()
     if request.method == 'POST':
         form = CustomeUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             username = form.cleaned_data.get('username')
-            # currently not in use
-            # group = Group.objects.get(name='customer')
-            # user.groups.add(group)
             messages.success(request, f"Account was created for { username }")
             return redirect('login')
     context = {
@@ -26,7 +26,10 @@ def registerView(request):
 
 
 @unauthenticated_user
-def loginView(request):
+def login_view(request):
+    """
+    Takes the request and returns the login form. In case of POST, the user will be logged in.
+    """
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -39,6 +42,6 @@ def loginView(request):
     return render(request, 'accounts/login.html')
 
 
-def logoutUser(request):
+def logout_user(request):
     logout(request)
     return redirect('login')
