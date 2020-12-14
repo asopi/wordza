@@ -9,8 +9,9 @@ body {
   background-color: transparent;
   width: 300px;
   height: 200px;
-  border: 1px solid #f1f1f1;
   perspective: 1000px;
+  margin: auto;
+  cursor: pointer;
 }
 
 .flip-card-inner {
@@ -23,7 +24,7 @@ body {
 }
 
 .flip-card-flipped .flip-card-inner {
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
 
 .flip-card-front, .flip-card-back {
@@ -43,11 +44,21 @@ body {
 .flip-card-back {
   background-color: dodgerblue;
   color: white;
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
 
 .card-hover:hover {
   cursor: pointer;
   background-color: #cce5ff;
   border-color: #b8daff;
+}
+
+.wordza-carousel {
+  height: 500px;
+  width: 100%;
+  background: #343a40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
