@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,4 +132,10 @@ STATICFILES_DIRS = [
     'vat/www/static',
 ]
 
+# Set environment variable for Google Translate API
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"google-credentials.json"
+
+# Bootstrap Error Tag for Messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}

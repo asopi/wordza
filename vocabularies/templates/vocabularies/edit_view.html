@@ -6,12 +6,11 @@
     <div class="d-flex justify-content-between align-items-stretch">
         <div class="flex-grow-1 d-none" id="edit-title">
             <div class="form-group">
-                <h1><input class="form-control" id="title" type="text" name="title" value="{{ form.title.value }}"></h1>
+                <h1><input class="form-control" id="title" type="text" name="title" value="{{ vocabulary_form.title.value }}"></h1>
             </div>
         </div>
-
         <div id="title-value">
-            <h2>{{ form.title.value }}</h2>
+            <h2>{{ vocabulary_form.title.value }}</h2>
         </div>
         <div class="ml-3">
             <button type="button" class="btn btn-outline-secondary" id="edit-button" href="#" onclick="edit()">
@@ -30,17 +29,16 @@
         <div class="flex-grow-1 d-none" id="edit-description">
             <div class="form-group">
                 <textarea class="form-control" id="description"
-                          name="description">{{ form.description.value }}</textarea>
+                          name="description">{{ vocabulary_form.description.value }}</textarea>
             </div>
         </div>
-
         <div class="mb-3" id="description-value">
-            <div>{{ form.description.value }}</div>
+            <div>{{ vocabulary_form.description.value }}</div>
         </div>
     </div>
 
-    <div class="d-none">{{ form.language }}</div>
-    <div class="d-none">{{ form.target_language }}</div>
+    <div class="d-none">{{ vocabulary_form.source_language }}</div>
+    <div class="d-none">{{ vocabulary_form.target_language }}</div>
 
     {{ form_set.management_form }}
 
@@ -50,7 +48,7 @@
             <tr>
                 <th width="10px">#</th>
                 <th>
-                    {{ vocabulary.language }}
+                    {{ vocabulary.source_language }}
                 </th>
                 <th>
                     {{ vocabulary.target_language }}
@@ -91,15 +89,8 @@
         </table>
 
     </div>
-
-
-    {% if form.errors %}
-    {{ form.errors }}
-    {% endif %}
-
-
-    {% if message %}
-    {{ message }}
+    {% if vocabulary_form.errors %}
+        {{ vocabulary_form.errors }}
     {% endif %}
 </form>
 {% endblock %}
@@ -114,7 +105,7 @@
           url: '{% url 'vocabularies:translate_vocable' %}',
           data:{
           value:$('#id_vocable_set-0-value').val(),
-          language: '{{ vocabulary.language }}',
+          source_language: '{{ vocabulary.source_language }}',
           target_language: '{{ vocabulary.target_language }}',
           csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
         },
@@ -124,7 +115,6 @@
       });
     });
   });
-
 </script>
 
 <script>

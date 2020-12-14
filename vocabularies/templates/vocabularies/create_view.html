@@ -28,7 +28,7 @@
                         <div class="col-md-10">
                             {% for language in languages %}
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="language" id="language"
+                                <input class="form-check-input" type="radio" name="source_language" id="source_language"
                                        value="{{language.0}}">
                                 <label class="form-check-label" for="{{language.0}}">
                                     {{language.1}}
@@ -57,8 +57,8 @@
                 {% endif %}
             </div>
             <div class="modal-footer">
-                <button class="btn btn-outline-primary" type="submit" form="create_vocabulary" value="Submit">{% include
-                    'icons/check_icon.html' %}
+                <button class="btn btn-outline-primary" type="submit" form="create_vocabulary" value="Submit">
+                    {% include 'icons/check_icon.html' %}
                 </button>
             </div>
         </div>

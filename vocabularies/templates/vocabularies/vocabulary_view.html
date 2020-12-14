@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h2>Vocabularies</h2>
-
 <div class="row">
     {% for vocabulary in vocabularies %}
     <div class="col-md-4 mt-3 mb-3">
@@ -18,11 +15,7 @@
         </a>
     </div>
     {% empty %}
-    <div class="col-md-12 mt-3 mb-3">
-        <div class="col alert alert-primary" role="alert">
-            You haven't created any vocabularies yet. Click + to create one.
-        </div>
-    </div>
+        {% include 'ui-components/alert.html' with text="You haven't created any vocabularies yet. Click + to create one." %}
     {% endfor %}
     <div class="col-md-4 mt-3 mb-3">
         <div class="card card-hover">

@@ -1,87 +1,97 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<style>
-
-body {
-  height: 100%;
-  font-family: "Nunito", sans-serif;
-  font-size: 16px;
-  background-color: #b3e5fc;
-}
-</style>
-
-<h2>{{ title }}</h2>
-<!-- TODO: implement dashboard template -->
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-md">
-            <div class="card" style="width: 18rem;">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <td><h3 class="text-center text-info">My Learnsets</h3></td>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">First Learn Set</th>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">Second Learn Set</th>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">Third Learn Set</th>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">... Learn Set</th>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">... Learn Set</th>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">... Learn Set</th>
-                    </tr>
-                    <tr align="center">
-                        <th scope="row">... Learn Set</th>
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <div class="col-md">
-            <h3 class="text-center text-info">My Progress</h3> <br>
-            <h5 class="text-center text-info">Learnset 1</h5> <br>
-            <div class="progress">
-                <div class="progress-bar bg-danger"  role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-                     aria-valuemax="100">25%
-                </div>
-            </div> <br>
-            <h5 class="text-center text-info">Learnset 2</h5> <br>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0"
-                     aria-valuemax="100">45%
-                </div>
-            </div>
-            <br>
-            <h5 class="text-center text-info">Learnset 3</h5> <br>
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
-                     aria-valuemax="100">80%
-                </div>
+{% if vocabularies|length == 0 %}
+<div class="row">
+  {% include 'ui-components/alert.html' with text="You haven't created any vocabularies yet. Go to Vocabulary and create one." %}
+</div>
+{% endif %}
+<div class="row">
+    <div class="col-md">
+        <div class="card text-white bg-secondary mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">{{ vocables|length }}</h5>
+                <p class="card-text">Vocables</p>
             </div>
         </div>
     </div>
+    <div class="col-md">
+        <div class="card text-white bg-secondary mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">{{ vocabularies|length }}</h5>
+                <p class="card-text">Vocabularies</p>
+            </div>
+          </div>
+    </div>
+    <div class="col-md">
+        <div class="card text-white bg-secondary mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">{{ learn_sets|length }}</h5>
+                <p class="card-text">Learn Sets</p>
+            </div>
+          </div>
+    </div>
 </div>
 
+<div class="row">
+    {% if vocabularies|length != 0 %}
+    <div class="col-md">
+        <div class="card">
+            <table class="table table-hover m-0">
+                <thead class="table-secondary">
+                  <tr>
+                    <th class="border-top-0" scope="col" colspan="2">Latest Vocables</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for vocable in vocables|slice:"10" %}
+                <tr>
+                <td scope="row">{{vocable.value}}</td>
+                <td scope="row">{{ vocable.translated_value}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card" >
+            <table class="table table-hover m-0">
+                <thead class="table-secondary">
+                  <tr>
+                    <th class="border-top-0" scope="col">Latest Vocabularies</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for vocabulary in vocabularies|slice:"10" %}
+                <tr>
+                <td scope="row">{{vocabulary.title}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card" >
+            <table class="table table-hover m-0">
+                <thead class="table-secondary">
+                  <tr>
+                    <th class="border-top-0" scope="col" colspan="2">Latest Learn Sets</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for learn_set in learn_sets|slice:"10" %}
+                <tr>
+                <td scope="row">{{learn_set.title}}</td>
+                <td scope="row">  {% include 'ui-components/progress.html' with progress=learn_set.progress %}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
 
 {% endblock %}
-
-#this was here before the template above:
-
-<ul class="list-group list-group-flush">
-    {% for learn_set in learn_sets %}
-    <li class="list-group-item">{{ learn_set.name }}</li>
-    {% endfor %}
-</ul>

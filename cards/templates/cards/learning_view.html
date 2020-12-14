@@ -2,25 +2,78 @@
 
 {% block content %}
 {% load static %}
-<h2>Learning view for {{ learn_set.name }}</h2>
 
-{% for vocable in vocables %}
-<div class="flip-card" id="flip-card-{{vocable.id}}" onclick="flip('{{vocable.id}}')">
-    <div class="flip-card-inner">
-        <div class="flip-card-front card-body">
-            <h1>{{ vocable.value }}</h1>
+  <h2>{{ learn_set.title }}</h2>
+  <div>{{ learn_set.description }}</div>
+  <div class="mt-3 mb-3">
+    {% include 'ui-components/progress.html' with progress=learn_set.progress %}
+  </div>
+
+
+{% if active_vocable %}
+<div class="carousel slide wordza-carousel" id="carouselExampleIndicators" data-ride="carousel">
+    <ol class="carousel-indicators">
+      {% for vocable in vocables %}
+        <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="{% if active_vocable.id == vocable.id %}active{% endif %}"></li>
+      {% endfor %}
+    </ol>
+
+    <div class="carousel-inner">
+        {% for vocable in vocables %}
+        <div class="carousel-item {% if active_vocable.id == vocable.id %} active {% endif %}">
+            <div class="flip-card" id="flip-card-{{vocable.id}}" onclick="flip('{{vocable.id}}')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card-body d-flex justify-content-center align-items-center">
+                        <h1>{{ vocable.value }}</h1>
+                    </div>
+                    <div class="flip-card-back card-body d-flex justify-content-center align-items-center">
+                      <div class="row">
+                        <h1 class="col col-12">{{ vocable.translated_value }}</h1>                   
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+              <form method="POST" action="{% url 'cards:submit_vocable' vocable.id %}">
+                {% csrf_token %}
+                <input type="hidden" value="{{learn_set.id}}" name="learn_set_id"> 
+                <input type="hidden" value="False" name="success"> 
+                
+                <button class="btn btn-none text-light shadow-none" type="submit" value="Failed">{% include 'icons/x_circle_icon.html' %}</button>
+              </form>
+              <form method="POST" action="{% url 'cards:submit_vocable' vocable.id %}">
+                {% csrf_token %}
+                <input type="hidden" value="{{learn_set.id}}" name="learn_set_id"> 
+                <input type="hidden" value="True" name="success">
+                <button class="btn btn-none text-light shadow-none" type="submit" value="Success">{% include 'icons/check_circle_icon.html' %}</i></button>
+              </form>     
+            </div>
         </div>
-        <div class="flip-card-back card-body">
-            <h1>{{ vocable.translated_value }}</h1>
-        </div>
+        {% endfor %}
     </div>
-</div>
-{% endfor %}
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
+{% else %}
 
+<div>No more Vocables to learn</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block custom_script %}
 <script>
   flip = (id) => document.querySelector("#flip-card-" + id).classList.toggle("flip-card-flipped")
-
+  $('.carousel').carousel({
+    interval: false,
+  });
 </script>
-
 {% endblock %}

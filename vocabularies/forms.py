@@ -5,4 +5,4 @@ from .models import Vocabulary
 class VocabulariesForm(forms.ModelForm):
     class Meta:
         model = Vocabulary
-        fields = ('title', 'description', 'language', 'target_language')
+        fields = ('title', 'description', 'source_language', 'target_language')
