@@ -12,7 +12,7 @@
                 {% if language_form %}
                 <form method="POST" action="." id="language_form">
                     {% csrf_token %}
-                    {{ language_form.as_p }}
+                    {{ language_form }}
                 </form>
                 {% endif %}
 
@@ -20,7 +20,28 @@
                     {% if learn_set_form.vocabularies|length > 0 %}
                     <form method="POST" action="{% url 'cards:create_view' %}" id="learn_set_form">
                         {% csrf_token %}
-                        {{ learn_set_form.as_p }}
+                    
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Title</label>
+                            <div class="col-md-10">
+                                <input class="form-control" id="title" type="text" name="title">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label" for="description mr-1">Description</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" id="description" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">{{ learn_set_form.vocabularies.label }}</label>
+                            <div class="col-md-10">
+                                {{ learn_set_form.vocabularies }}
+                            </div>
+                        </div>
+                      
                     </form>
                     {% else %}
                     <div>No vocabularies for this language pair</div>
