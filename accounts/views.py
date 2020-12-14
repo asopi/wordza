@@ -35,9 +35,8 @@ def loginView(request):
             login(request, user)
             return redirect('/')
         else:
-            messages.info(request, 'Username or Password is incorrect')
-    context = {}
-    return render(request, 'accounts/login.html', context)
+            messages.error(request, 'Username or Password is incorrect')
+    return render(request, 'accounts/login.html')
 
 
 def logoutUser(request):
