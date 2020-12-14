@@ -12,10 +12,13 @@ translate_client = translate.Client()
 
 @login_required
 def vocabulary_view(request):
-    vocabularies = Vocabulary.objects.order_by('-creation_date')
+    vocabularies = Vocabulary.objects.filter(user=request.user).order_by('-creation_date')
     vocabulary_form = VocabulariesForm(request.POST or None)
-    if request.method == 'POST' and vocabulary_form.is_valid():
-        vocabulary_form.save()
+    if request.method == 'POST':
+        if vocabulary_form.is_valid():
+            instance = vocabulary_form.save(commit=False)
+            instance.user = request.user
+            vocabulary_form.save()
 
     context = {
         "vocabulary_form": vocabulary_form,
@@ -29,30 +32,41 @@ def vocabulary_view(request):
 @login_required
 def edit_view(request, vocabulary_id):
     vocabulary = get_object_or_404(Vocabulary, pk=vocabulary_id)
+    vocables = Vocable.objects.filter(
+        user=request.user,
+        vocabulary_id=vocabulary_id
+    ).order_by('-creation_date')
+    vocabulary_form = VocabulariesForm(instance=vocabulary)
+    
     VocabularyFormSet = inlineformset_factory(
-        Vocabulary, Vocable, fields=('value', 'translated_value'), extra=1)
-    form = VocabulariesForm(instance=vocabulary)
-
+        Vocabulary,
+        Vocable,
+        fields=('value', 'translated_value'),
+        extra=1
+    )
     form_set = VocabularyFormSet(
-        queryset=Vocable.objects.none(), instance=vocabulary)
-    vocables = Vocable.objects.filter(vocabulary_id=vocabulary_id)
+        queryset=Vocable.objects.none(),
+        instance=vocabulary
+    )
 
     if request.method == 'POST':
-        form = VocabulariesForm(request.POST or None, instance=vocabulary)
+        vocabulary_form = VocabulariesForm(request.POST or None, instance=vocabulary)
         form_set = VocabularyFormSet(request.POST or None, instance=vocabulary)
 
-        if form_set.is_valid() and form.is_valid():
-            form.save()
+        if form_set.is_valid():
+            for form in form_set:
+                instance_form = form.save(commit=False)
+                instance_form.user = request.user
             form_set.save()
-            vocabulary = get_object_or_404(Vocabulary, pk=vocabulary_id)
-            VocabularyFormSet = inlineformset_factory(
-                Vocabulary, Vocable, fields=('value', 'translated_value'), extra=1)
-            form_set = VocabularyFormSet(
-                queryset=Vocable.objects.none(), instance=vocabulary)
-            vocables = Vocable.objects.filter(
-                vocabulary_id=vocabulary_id).order_by('-creation_date')
+       
+        if vocabulary_form.is_valid():
+            instance_vocabulary_form = vocabulary_form.save(commit=False)
+            instance_vocabulary_form.user = request.user
+            vocabulary_form.save()
+
+
     context = {
-        "form": form,
+        "vocabulary_form": vocabulary_form,
         "form_set": form_set,
         "vocables": vocables,
         "vocabulary": vocabulary
@@ -64,10 +78,10 @@ def edit_view(request, vocabulary_id):
 def translate_vocable(request):
     if request.method == 'POST':
         value = request.POST["value"]
-        language = request.POST["language"]
+        source_language = request.POST["source_language"]
         target_language = request.POST["target_language"]
         response = translate_client.translate(
-            value, source_language=language, target_language=target_language)
+            value, source_language=source_language, target_language=target_language)
         return HttpResponse(response["translatedText"])
     else:
         return HttpResponse("")
