@@ -65,12 +65,10 @@ def edit_view(request, vocabulary_id):
                 instance_form = form.save(commit=False)
                 instance_form.user = request.user
             form_set.save()
-       
         if vocabulary_form.is_valid():
             instance_vocabulary_form = vocabulary_form.save(commit=False)
             instance_vocabulary_form.user = request.user
             vocabulary_form.save()
-
 
     context = {
         "vocabulary_form": vocabulary_form,
