@@ -34,18 +34,15 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-              <form method="POST" action="{% url 'cards:submit_vocable' vocable.id %}">
+              <form method="POST" action="{% url 'cards:submit_vocable' learn_set.id vocable.id %}">
                 {% csrf_token %}
-                <input type="hidden" value="{{learn_set.id}}" name="learn_set_id"> 
                 <input type="hidden" value="False" name="success"> 
-                
-                <button class="btn btn-none text-light shadow-none" type="submit" value="Failed">{% include 'icons/x_circle_icon.html' %}</button>
+                <button class="btn btn-none text-light shadow-none" type="submit">{% include 'icons/x_circle_icon.html' %}</button>
               </form>
-              <form method="POST" action="{% url 'cards:submit_vocable' vocable.id %}">
+              <form method="POST" action="{% url 'cards:submit_vocable' learn_set.id vocable.id %}">
                 {% csrf_token %}
-                <input type="hidden" value="{{learn_set.id}}" name="learn_set_id"> 
                 <input type="hidden" value="True" name="success">
-                <button class="btn btn-none text-light shadow-none" type="submit" value="Success">{% include 'icons/check_circle_icon.html' %}</i></button>
+                <button class="btn btn-none text-light shadow-none" type="submit" >{% include 'icons/check_circle_icon.html' %}</i></button>
               </form>     
             </div>
         </div>
