@@ -15,9 +15,9 @@ It is a learning application which focuses especially on the translation of indi
 
 ## Features
 * Accounts: User registration and login
-* Dashboard: Overview of learn sets and progress
-* Vocabularies: User is able to generate vocabulary lists 
-* Learn sets: User is able to combine several vocabulary lists and learn them with flipping cards
+* Dashboard: Overview of Vocables, Vocabularies and LearnSets
+* Vocabularies: User is able to create Vocabularies
+* LearnSets (Cards): User is able to combine several Vocabularies and learn them with flipping cards
 
 ## Technologies
 
@@ -32,29 +32,28 @@ A list of technologies used within the project:
 A little intro about the installation of wordza.
 
 First clone the repository from Github and switch to the new directory:
-
+```
 $ git clone https://github.com/asopi/wordza.git
-
 $ cd wordza 
-
+```
 Activate the virtualenv for your project.
 
 Install project dependencies:
-
+```
 $ pip install -r requirements.txt
-
+```
 Then simply apply the migrations:
-
+```
 $ python manage.py migrate
-
+```
 Create superuser (optional):
-
+```
 $ python manage.py createsuperuser
-
+```
 You can now run the development server:
-
+```
 $ python manage.py runserver
-
+```
 ## Collaboration
 
 How the team collaborated throughout the project:
@@ -70,7 +69,7 @@ For every feature or bugfix, a new branch will be checked out from the develop b
 The pull request workflow ensures that each change is subject to a code review by another team member. 
 This ensures a consistently high quality.
 
-##Code Style Guide
+## Code Style Guide
 
 PEP8:
 Compliance with these guidelines is automatically checked in the development environment and during the deployment process using Pylint.
